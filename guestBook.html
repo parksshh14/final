@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="guestBook.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <button class="more" id="menuBtn" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="logo">
+          <span class="logo-def">Secure </span
+          ><span class="logo-high">Web</span>
+        </div>
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="guestBook.html">GuestBook</a></li>
+          <li><a href="team.html">Team</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="security.html">Security</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="team.html">Team</a>
+    </div>
+
+    <div class="guestbook-container">
+      <h2 class="guestbook-title">security web방명록</h2>
+
+      <form id="guestbookForm">
+        <input
+          type="text"
+          id="guestName"
+          placeholder="작성자 닉네임"
+          required
+          autocomplete="off"
+        />
+        <textarea
+          id="guestMessage"
+          placeholder="방명록을 남겨주세요"
+          rows="3"
+          required
+        ></textarea>
+        <button type="submit" id="submitBtn">기록 남기기</button>
+      </form>
+
+      <div id="logArea" class="log-area"></div>
+    </div>
+
+    <div class="bottom">
+        <hr />
+        <div class="bottom-content">
+          <div class="bottom-left">
+            <div class="bottom-title">
+              <h2>Secure <span class="bottom-high">Web</span></h2>
+            </div>
+            <div class="bottom-ex">
+              <p>
+                보안과 웹 개발의 교차점에서 미래 기술을<br />탐구하는 팀
+                프로젝트입니다.
+              </p>
+            </div>
+            <br />
+            <div class="bottom-secure">2026 중부대학교 정보보호학과</div>
+          </div>
+          <div class="bottom-topics">
+            <div class="bottom-web">
+              <h3>웹 보안</h3>
+              <br />
+              <ul>
+                <li>DDos 공격</li>
+                <li>API Injection</li>
+                <li>XSS</li>
+              </ul>
+            </div>
+            <div class="bottom-app">
+              <h3>애플리케이션 보안</h3>
+              <br />
+              <ul>
+                <li>Broken Access Control</li>
+                <li>Insecure Design</li>
+                <li>Vulnerable and Outdated Components</li>
+              </ul>
+            </div>
+            <div class="bottom-network">
+              <h3>네트워크 보안</h3>
+              <br />
+              <ul>
+                <li>IP Header & ACL</li>
+                <li>Secure Connection</li>
+                <li>Firewall</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  </body>
+
+
+  <script src="guestBook.js"></script>
+</html>

@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecureWeb | Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="quiz.js" defer></script>
+    <style>
+      /* 퀴즈 본문에 최적화된 다크 테마 보조 서식 */
+      .quiz-body-wrapper {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      .quiz-container {
+        background-color: #131a3e;
+        width: 100%;
+        max-width: 650px;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        border: 1px solid #1e295d;
+      }
+
+      @media (max-width: 480px) {
+        .quiz-container {
+          padding: 20px;
+        }
+        .quiz-main-title {
+          font-size: 24px !important;
+        }
+        .question-text {
+          font-size: 18px !important;
+        }
+        .option-btn {
+          padding: 12px !important;
+          font-size: 14px;
+        }
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .quiz-main-title {
+        color: #00ff41;
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .description {
+        text-align: center;
+        color: #a0aec0;
+        margin-bottom: 30px;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .progress-container {
+        margin-bottom: 20px;
+      }
+      .status-text {
+        display: flex;
+        justify-content: space-between;
+        color: #a0aec0;
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+
+      .progress-bar {
+        background-color: #2d3748;
+        height: 8px;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        background-color: #00ff41;
+        width: 0%;
+        height: 100%;
+        transition: width 0.3s ease;
+      }
+
+      .question-text {
+        font-size: 22px;
+        margin-bottom: 25px;
+        line-height: 1.4;
+        color: #ffffff;
+      }
+
+      .options-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 25px;
+      }
+
+      .option-btn {
+        background-color: #1a234d;
+        color: #ffffff;
+        border: 1px solid #2d3748;
+        padding: 16px;
+        border-radius: 10px;
+        text-align: left;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        transition: all 0.2s;
+      }
+
+      .option-btn.selected {
+        border-color: #00ff41;
+        background-color: #1a3a3a;
+      }
+      .option-btn.correct {
+        border-color: #2ecc71;
+        background-color: rgba(46, 204, 113, 0.2);
+        color: #2ecc71;
+        font-weight: bold;
+      }
+      .option-btn.wrong {
+        border-color: #e74c3c;
+        background-color: rgba(231, 76, 60, 0.2);
+        color: #e74c3c;
+      }
+
+      .feedback-box {
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #ffffff;
+      }
+
+      .action-container {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .action-btn {
+        background-color: #00ff41;
+        color: #0a0e27;
+        border: none;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .action-btn:disabled {
+        background-color: #4a5568;
+        color: #a0aec0;
+        cursor: not-allowed;
+      }
+
+      .score-box {
+        background-color: #1a234d;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 320px;
+        margin: 25px auto;
+        border: 1px solid #1e295d;
+        text-align: center;
+      }
+
+      .score-num {
+        font-size: 48px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 5px;
+      }
+
+      .badge-text {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 6px 16px;
+        background-color: #0a0e27;
+        border-radius: 20px;
+        font-weight: bold;
+        border: 1px solid #2d3748;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <button class="more" id="menuBtn" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="logo">
+          <span class="logo-def">Secure </span
+          ><span class="logo-high">Web</span>
+        </div>
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="quiz.html" class="active">Quiz</a></li>
+          <li><a href="guestBook.html">GuestBook</a></li>
+          <li><a href="team.html">Team</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="security.html">Security</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="guestBook.html">GuestBook</a>
+      <a href="team.html">Team</a>
+    </div>
+
+    <div class="quiz-section-wrapper">
+      <div class="quiz-container" style="margin: 30px auto">
+        <div id="start-screen">
+          <div class="quiz-main-title">보안 지식 퀴즈</div>
+          <p class="description">
+            Security 페이지에서 학습한 9가지 보안 개념을 테스트해보세요!<br />
+            각 문제는 4지선다형으로 구성되어 있으며, 정답을 선택한 후 '정답
+            제출' 버튼을 눌러주세요.<br />
+          </p>
+          <div style="text-align: center">
+            <button class="action-btn" id="start-btn">퀴즈 시작하기</button>
+          </div>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+          <div class="progress-container">
+            <div class="status-text">
+              <span id="question-counter">문제 1 / 9</span>
+              <span id="score-counter">현재 점수: 0점</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="question-text" id="question-text">
+            질문 내용 로딩 중...
+          </div>
+          <div class="options-grid" id="options-container"></div>
+          <div id="quiz-feedback-area"></div>
+
+          <div class="action-container">
+            <button class="action-btn" id="next-btn" disabled>정답 제출</button>
+          </div>
+        </div>
+
+        <div id="result-screen" class="hidden">
+          <div class="quiz-main-title" style="text-align: center">
+            테스트 완료!
+          </div>
+          <p
+            class="description"
+            style="margin-bottom: 15px; text-align: center"
+          >
+            학습 결과를 확인해보세요.
+          </p>
+
+          <div class="score-box">
+            <div
+              style="
+                color: #a0aec0;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              "
+            >
+              정답률
+            </div>
+            <div class="score-num" id="final-percentage">0%</div>
+            <div style="color: #a0aec0" id="final-count">(0 / 9 문제 맞춤)</div>
+          </div>
+
+          <div style="text-align: center">
+            <button
+              class="action-btn"
+              id="restart-btn"
+              style="
+                background-color: transparent;
+                border: 2px solid #00ff41;
+                color: #00ff41;
+              "
+            >
+              다시 도전하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <hr />
+      <div class="bottom-content">
+        <div class="bottom-left">
+          <div class="bottom-title">
+            <h2>Secure <span class="bottom-high">Web</span></h2>
+          </div>
+          <div class="bottom-ex">
+            <p>
+              보안과 웹 개발의 교차점에서 미래 기술을<br />탐구하는 팀
+              프로젝트입니다.
+            </p>
+          </div>
+          <br />
+          <div class="bottom-secure">2026 중부대학교 정보보호학과</div>
+        </div>
+        <div class="bottom-topics">
+          <div class="bottom-web">
+            <h3>웹 보안</h3>
+            <br />
+            <ul>
+              <li>DDos 공격</li>
+              <li>API Injection</li>
+              <li>XSS</li>
+            </ul>
+          </div>
+          <div class="bottom-app">
+            <h3>애플리케이션 보안</h3>
+            <br />
+            <ul>
+              <li>Broken Access Control</li>
+              <li>Insecure Design</li>
+              <li>Vulnerable and Outdated Components</li>
+            </ul>
+          </div>
+          <div class="bottom-network">
+            <h3>네트워크 보안</h3>
+            <br />
+            <ul>
+              <li>IP Header & ACL</li>
+              <li>Secure Connection</li>
+              <li>Firewall</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

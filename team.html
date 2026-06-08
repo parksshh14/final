@@ -13,18 +13,21 @@
           <span></span><span></span><span></span>
         </button>
         <div class="logo">
-          <span class="logo-def">Secure</span
-          ><span class="logo-high">Web</span>
+          <span class="logo-def">Secure</span><span class="logo-high">Web</span>
         </div>
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
           <li><a href="security.html">Security</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="guestBook.html">GuestBook</a></li>
           <li><a href="team.html">Team</a></li>
         </ul>
 
         <ul class="mobile-menu" id="mobileMenu">
           <li><a href="index.html">Home</a></li>
           <li><a href="security.html">Security</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="guestBook.html">GuestBook</a></li>
           <li><a href="team.html">Team</a></li>
         </ul>
       </div>
@@ -89,7 +92,7 @@
               <img src="blog.png" alt="Blog" />
             </a>
             <a
-              href="https://hcjportpilo.vercel.app/"
+              href="https://webprografinalexam.vercel.app/"
               target="_blank"
               class="icon-btn"
             >
@@ -179,20 +182,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      const btn = document.getElementById('menuBtn')
-      const menu = document.getElementById('mobileMenu')
-
-      btn.addEventListener('click', () => {
-        menu.classList.toggle('open')
-      })
-
-      document.addEventListener('click', (e) => {
-        if (!btn.contains(e.target) && !menu.contains(e.target)) {
-          menu.classList.remove('open')
-        }
-      })
-    </script>
   </body>
 </html>
